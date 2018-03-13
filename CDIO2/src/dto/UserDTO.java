@@ -16,10 +16,9 @@ public class UserDTO implements Serializable{
 	private String password;
 	private String cpr;
 	
-	public UserDTO(int userId, String userName, String ini, List<String> roles, String password, String cpr) {
+	public UserDTO(int userId, String userName, List<String> roles, String password, String cpr) {
 		this.userId = userId;
 		this.userName = userName;
-		this.ini = ini;
 		this.roles = roles;
 		this.password = password;
 		this.cpr = cpr;
@@ -78,13 +77,12 @@ public class UserDTO implements Serializable{
 	}
 	
 	public String getIni() {
-//		String ini = "";
-//		for(int i = 0; i < userName.length() && ini.length() < 4; i++) {
-//			if(Character.isUpperCase(userName.charAt(i))) {
-//				ini = ini + userName.charAt(i);
-//			}
-//		} 
-		return ini;
+		String ini = "";
+		for(int i = 0; i < userName.length() && ini.length() < 4; i++) {
+			if(Character.isUpperCase(userName.charAt(i))) {
+				ini = ini + userName.charAt(i);
+			}
+		} return ini;
 	}
 	
 	

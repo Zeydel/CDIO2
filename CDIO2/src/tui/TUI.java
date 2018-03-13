@@ -107,6 +107,8 @@ public class TUI {
 	}
 
 	private void editUser() {
+		
+
 		System.out.println("V�lg id p� den bruger du vil �ndre p�.");
 
 		int id = 0;
@@ -150,7 +152,7 @@ public class TUI {
 			roles.add(newRole);
 		}
 		for(int i = 0; i < roles.size(); i++) {
-			currentUser.setRoles(roles);
+			currentUser.addRole(roles.get(i));
 		}
 		break;
 		}

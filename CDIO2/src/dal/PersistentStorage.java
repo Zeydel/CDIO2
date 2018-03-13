@@ -30,7 +30,7 @@ public class PersistentStorage implements IUserDAO {
 		UserStore userStore = new UserStore();
 		ObjectInputStream oIS = null;
 		try {
-			FileInputStream fIS = new FileInputStream(System.getProperty("user.dir") + "/src/test/" + fileName);
+			FileInputStream fIS = new FileInputStream("/Users/isaacirani/git/CDIO1/" + fileName);
 			oIS = new ObjectInputStream(fIS);
 			Object inObj = oIS.readObject();
 			if (inObj instanceof UserStore){
@@ -60,15 +60,22 @@ public class PersistentStorage implements IUserDAO {
 	
 	@Override
 	public UserDTO getUser(int userId) throws DALException {
-
-		if(users.size()!= 0) {
-			for (UserDTO u : users) {
-				if (u.getUserId() == userId) {
-					return u;
-				}
-			}
-		}return null;
-
+		
+		// ######## Har vi ikke lært endnu ########
+		UserDTO user = users.stream().filter(u->u.getUserId() == userId).collect(Collectors.toList()).get(0);
+	
+		return user;
+		
+		
+//		####### almindeligt for loop ######
+/**		
+* UserDTO user = new UserDTO();
+*		for (UserDTO u : users) {
+*			if (u.getUserId() == userId) {
+*				user = u;
+*			}
+*		}
+**/
 	}
 
 	@Override
@@ -103,7 +110,7 @@ public class PersistentStorage implements IUserDAO {
 
 	public void saveTofile() {
 		
-		File file = new File(System.getProperty("user.dir") + "/src/test/" + fileName);
+		File file = new File("/Users/isaacirani/git/CDIO1/" + fileName);
 		UserStore userStore = new UserStore();
 		
 		Map<Integer, UserDTO> userMap = new HashMap<Integer, UserDTO>();

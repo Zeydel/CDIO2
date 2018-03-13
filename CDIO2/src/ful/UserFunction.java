@@ -1,3 +1,5 @@
+
+
 package ful;
 
 import java.util.ArrayList;
@@ -10,21 +12,17 @@ import dto.UserDTO;
 
 public class UserFunction {
 
-	PersistentStorage storage = new PersistentStorage("saveData");
-
-	public UserFunction(PersistentStorage storage) {
-		try {
-			storage.loadUsers();
-		} catch (DALException e) {
-		}
-		this.storage = storage;
+	public UserFunction() {
 
 	}
 
-	public void addUser(int userId, String userName, List<String> roles, String password, String cpr) throws DALException {
+	IUserDAO storage;
+	public UserFunction(IUserDAO storage) {
+		this.storage = storage;
+	}
 
+	public void addUser(int userId, String userName, List<String> roles, String password, String cpr) throws DALException {
 		storage.createUser(new UserDTO(userId, userName, roles, password, cpr));
-		storage.saveTofile();
 	}
 
 	public void editName(int userId, String newName) throws DALException {
@@ -32,9 +30,10 @@ public class UserFunction {
 			if (storage.getUserList().get(i).getUserId() == userId) {
 				storage.getUserList().get(i).setUserName(newName);
 				storage.updateUser(storage.getUserList().get(i));
-				storage.saveTofile();
+				return;
 			}
-		} throw new DALException("User with ID " + userId + " not found.");
+		} throw new DALException("User with ID " + userId + "not found");
+
 	}
 
 	public void editPassword(int userId, String newPassword) throws DALException {
@@ -42,9 +41,9 @@ public class UserFunction {
 			if (storage.getUserList().get(i).getUserId() == userId) {
 				storage.getUserList().get(i).setPassword(newPassword);
 				storage.updateUser(storage.getUserList().get(i));
-				storage.saveTofile();
+				return;
 			}
-		}  throw new DALException("User with ID " + userId + " not found.");
+		} throw new DALException("User with ID " + userId + "not found");
 	}
 
 	public void editRoles(int userId, ArrayList<String> newRoles) throws DALException {
@@ -52,13 +51,11 @@ public class UserFunction {
 		for(int i = 0; i < storage.getUserList().size()-1; i++) {
 			if (storage.getUserList().get(i).getUserId() == userId) {
 				currentUser = storage.getUserList().get(i);
-				currentUser.setRoles(newRoles);
 			}
 		}
-		if (currentUser != null) {
-			storage.updateUser(currentUser);
-			storage.saveTofile();
-		}  else throw new DALException("User with ID " + userId + " not found.");
+		for(int i = 0; i < newRoles.size(); i++) {
+			currentUser.getRoles().add(newRoles.get(i));
+		} 
 
 	}
 
@@ -75,16 +72,19 @@ public class UserFunction {
 	}
 
 	public void deleteUser(int userId) throws DALException {
-		storage.deleteUser(userId);
+		try {
+			storage.deleteUser(userId);
+		} catch (DALException e) {
+			throw new DALException("User with ID " + userId + "not found");
+		}
 	}
-
 	public boolean asserIfIdExists(int userId) {
 		try {
 			for(int i = 0; i < storage.getUserList().size(); i++) {
 				if(storage.getUserList().get(i).getUserId() == userId) {
 					return true;
 				}
-			} 
+			}
 		} catch (DALException e) {
 			return false;
 		} return false;
