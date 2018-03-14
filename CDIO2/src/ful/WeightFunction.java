@@ -8,9 +8,9 @@ package ful;
 public class WeightFunction {
 
 
-	       private Socket pingSocket = null;
-	       private PrintWriter out = null;
-	       private BufferedReader in = null;
+	      	Socket pingSocket = null;
+	      	PrintWriter out = null;
+	      	BufferedReader in = null;
 	       
 
 	        public void getWeight() throws IOException {
@@ -73,5 +73,37 @@ public class WeightFunction {
 	        
 	        }
 	        
+
+	        public void EnterNumber() throws IOException {
+	 	       
+	        	try {
+	        		pingSocket = new Socket("127.0.0.1", 8000);
+	        		System.out.println("Connected to weight simulator");
+	        		out = new PrintWriter(pingSocket.getOutputStream(), true);
+	        		in = new BufferedReader(new InputStreamReader(pingSocket.getInputStream()));
+	        	} catch(IOException e) {
+	        		return;		
+	        }
+	        out.println("RM20 8 ”INDTAST BATCHNUMBER” ”” ”&3” crlf");
+	        System.out.println(in.readLine());
+	        out.close();
+	        in.close();
+	        pingSocket.close();
+	        }
 	        
+	        public void EnterID() throws IOException {
+	        	try {
+	        		pingSocket = new Socket("127.0.0.1", 8000);
+	        		System.out.println("Connected to weight simulator");
+	        		out = new PrintWriter(pingSocket.getOutputStream(), true);
+	        		in = new BufferedReader(new InputStreamReader(pingSocket.getInputStream()));
+	        	} catch(IOException e) {
+	        		return;	
+	        }
+	        out.println("RM20 8 ”INDTAST ID” ”” ”&3” crlf");
+	        System.out.println(in.readLine());
+	        out.close();
+	        in.close();
+	        pingSocket.close();
+	        }
 }
