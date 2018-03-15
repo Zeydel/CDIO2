@@ -34,7 +34,8 @@ public class WeightFunction {
 	public static void main(String[] args) {
 		WeightFunction test = new WeightFunction(storage);
 		try {
-			System.out.println(test.EnterNumber("test"));
+			//System.out.println(test.EnterNumber("test"));
+			test.writeALotOfText("TEXT");
 		} catch (IOException e) {
 			System.out.println("failed");
 		}
@@ -72,21 +73,26 @@ public class WeightFunction {
 
     //Writes a message in the display 
 	public void WriteTextInDisplay(String text) throws IOException {
-		out.println("D ”" + text + "” crlf");
-
-	}
+		String param = text.split(" ")[0];
+		String output = ("D ”" + param + "” crlf");
+		out.println(output);
+		in.readLine();
+	} 
 	
 	public void writeALotOfText(String msg) throws IOException {
-		out.println("P111 ”" + msg + "” crlf	");
+		
+		String param;
+		param = msg;
+		out.println("P111 ”" + msg + "” crlf");
 	}
 
 	//Writes a message in the display and returns a user number input
 	public int EnterNumber(String msg) throws IOException {
-		out.println("RM20 8 ”"+ msg +"” ”” crlf");
-		in.readLine();
+		out.println("RM20 8 ”"+ msg +" crlf");
+		in.readLine();  
 		in.skip(4);
 		String str = in.readLine().replaceAll("\\D+","");
-		int output = Integer.parseInt(str);
+		int output = Integer.parseInt(str);  
 		return (output);
 	}
 
@@ -107,4 +113,5 @@ public class WeightFunction {
 		}
 		return itemsAsStrings;
 	}
+	
 }
