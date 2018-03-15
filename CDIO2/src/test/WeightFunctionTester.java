@@ -11,7 +11,7 @@ import ful.WeightFunction;
 public class WeightFunctionTester {
 	
 	Socket pingSocket = null;
-	PrintWriter out = null;
+	PrintWriter out = null; 
 	BufferedReader in = null;
 
 	
