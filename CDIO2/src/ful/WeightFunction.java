@@ -40,6 +40,12 @@ public class WeightFunction {
 	        
 	        public void WeightTare() throws IOException {
 	        	
+//	        	 public static void main(String[] args) throws IOException{
+//	           		
+//	        		Socket pingSocket = null;
+//	    	        PrintWriter out = null;
+//	    	        BufferedReader in = null;
+	        	
 	        	try {
 	        		pingSocket = new Socket("127.0.0.1", 8000);
 	        		System.out.println("Connected to weight simulator");
@@ -55,6 +61,13 @@ public class WeightFunction {
 	        	pingSocket.close();
 	        	
 	        }
+	        
+//  public static void main(String[] args) throws IOException{
+//           		
+//        		Socket pingSocket = null;
+//    	        PrintWriter out = null;
+//    	        BufferedReader in = null;
+	        
 	        
 	        public void ReturnToWeightDisplay() throws IOException {
 	        	try {
@@ -78,7 +91,7 @@ public class WeightFunction {
 //        		Socket pingSocket = null;
 //    	        PrintWriter out = null;
 //    	        BufferedReader in = null;
-	        
+//	        
 	        public void WriteTextInDisplay() throws IOException {
 	        	try {
 	        		pingSocket = new Socket("127.0.0.1", 8000);
