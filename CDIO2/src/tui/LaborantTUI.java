@@ -67,33 +67,59 @@ public class LaborantTUI {
 		}
 	}
 
+
 	public void createBatcht() {
 		try {
-			function.writeALotOfText("HEJ");
-			int id = function.EnterNumber("Enter UserID");
+			int id = function.EnterNumber("Enter UserID, press OK to continue");
 			while(!uFunction.asserIfIdExists(id)) {
 				id = function.EnterNumber("No user with this ID, try again");	
 			}
-			try {
 			String name = uFunction.findUser(id).getUserName();
-			function.EnterNumber(name);
-			}catch(NumberFormatException e){
-				
-			}
-			try {
+			
+			function.ReturnToWeightDisplay();
+			
+			function.writeALotOfText("Welcome " + name + ", press [-> to continue");
+			
 			int batchNr = function.EnterNumber("Enter BatchNr");
-			}catch(NumberFormatException e) {
-				Random ran = new Random();
-				int batchNr = ran.nextInt(10000);
+			System.out.println(function.isValidBatchNumber(batchNr));
+			while(!function.isValidBatchNumber(batchNr)) {
+				batchNr = function.EnterNumber("Batchnumber cant be used, try again");
 			}
-			function.writeALotOfText("A LOT OF TEXT");
-
-			while(true) {
-
-			}
-		}
-		catch(IOException e) {
-			System.out.println("The Program has Crashed");
+			function.ReturnToWeightDisplay();
+			function.writeALotOfText("Fjern venligst alt fra vægten");
+			
+			function.WeightTare();
+			
+			function.ReturnToWeightDisplay();
+			
+			function.writeALotOfText("Placer tom beholder på vægt");
+			
+			int tareWeight = function.getWeight();
+			
+			function.WeightTare();
+			
+			
+			function.writeALotOfText("Placer indhold i beholder");
+			
+			int netto = function.getWeight();
+			
+			function.WeightTare();
+			
+			function.writeALotOfText("Fjern alt fra vægten");
+			
+			int brutto = function.getWeight();
+			
+			function.WeightTare();
+			
+			if(brutto - tareWeight == netto) {
+				String itemName = function.getStringFromDisplay("Hvad har du vejet?");
+				function.ReturnToWeightDisplay();
+				function.addItem(batchNr, itemName, netto, id);
+				
+			} else function.writeALotOfText("Fejl i bruttokontrol. Batch kasseret.");
+			
+		}catch(IOException e) {
+			System.out.println("lol rip");
 		}
 
 	}
