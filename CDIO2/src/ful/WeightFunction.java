@@ -11,6 +11,7 @@ public class WeightFunction {
 	      	Socket pingSocket = null;
 	      	PrintWriter out = null;
 	      	BufferedReader in = null;
+	 
 	       
 
 	        public void getWeight() throws IOException {
@@ -30,7 +31,6 @@ public class WeightFunction {
 	        	} catch(IOException e){
 	        		return;
 	        	}
-	        	System.out.println("reading command...");
 	        	out.println("S crlf");
 	        	System.out.println(in.readLine());
 	        	out.close();
@@ -56,7 +56,7 @@ public class WeightFunction {
 	        	
 	        }
 	        
-	        public void ReturnToShowWeight(String weight) throws IOException {
+	        public void ReturnToWeightDisplay() throws IOException {
 	        	try {
 	        		pingSocket = new Socket("127.0.0.1", 8000);
 	        		System.out.println("Connected to weight simulator");
@@ -65,7 +65,7 @@ public class WeightFunction {
 	        	} catch(IOException e) {
 	        		return;		
 	        }
-	        out.println("CW crlf");
+	        out.println("DW crlf");
 	        System.out.println(in.readLine());
 	        out.close();
 	        in.close();
@@ -73,8 +73,36 @@ public class WeightFunction {
 	        
 	        }
 	        
+//	        public static void main(String[] args) throws IOException{
+//           		
+//        		Socket pingSocket = null;
+//    	        PrintWriter out = null;
+//    	        BufferedReader in = null;
+	        
+	        public void WriteTextInDisplay() throws IOException {
+	        	try {
+	        		pingSocket = new Socket("127.0.0.1", 8000);
+	        		System.out.println("Connected to weight simulator");
+	        		out = new PrintWriter(pingSocket.getOutputStream(), true);
+	        		in = new BufferedReader(new InputStreamReader(pingSocket.getInputStream()));
+	        	} catch(IOException e) {
+	        		return;		
+	        }	
+	        out.println("D ” ” crlf");
+	        System.out.println(in.readLine());
+	        out.close();
+	        in.close();
+	        pingSocket.close();
+	        
+	        }
+
 
 	        public void EnterNumber() throws IOException {
+//	        	public static void main(String[] args) throws IOException{
+//	           		
+//	        		Socket pingSocket = null;
+//	    	        PrintWriter out = null;
+//	    	        BufferedReader in = null;
 	 	       
 	        	try {
 	        		pingSocket = new Socket("127.0.0.1", 8000);
@@ -85,6 +113,8 @@ public class WeightFunction {
 	        		return;		
 	        }
 	        out.println("RM20 8 ”INDTAST BATCHNUMBER” ”” ”&3” crlf");
+	        System.out.println(in.readLine());
+	        out.println("RM20 B crlf");
 	        System.out.println(in.readLine());
 	        out.close();
 	        in.close();
@@ -101,6 +131,8 @@ public class WeightFunction {
 	        		return;	
 	        }
 	        out.println("RM20 8 ”INDTAST ID” ”” ”&3” crlf");
+	        System.out.println(in.readLine());
+	        out.println("RM20 B crlf");
 	        System.out.println(in.readLine());
 	        out.close();
 	        in.close();
