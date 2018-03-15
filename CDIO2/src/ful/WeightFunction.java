@@ -39,6 +39,7 @@ public class WeightFunction {
 	}
 
 
+	//Reads weight from weightsim and returns it as an int
 	public int getWeight() throws IOException {
 		try {
 			out.println("S crlf");
@@ -52,6 +53,7 @@ public class WeightFunction {
 		}
 	}
 
+	//Tares the weightsim
 	public void WeightTare() throws IOException {
 
 		out.println("T crlf");
@@ -60,27 +62,29 @@ public class WeightFunction {
 	}
 
 
+	//Used to return to weight display after a String has been displayed
 	public void ReturnToWeightDisplay() throws IOException {
 		out.println("DW crlf");
 		in.readLine();
 	}
 
-        
+    //Writes a message in the display 
 	public void WriteTextInDisplay(String text) throws IOException {
 		out.println("D ”" + text + "” crlf");
 
 	}
 
-
+	//Writes a message in the display and returns a user number input
 	public int EnterNumber(String msg) throws IOException {
 		out.println("RM20 8 ”"+ msg +"” ”” crlf");
 		in.readLine();
+		in.skip(4);
 		String str = in.readLine().replaceAll("\\D+","");
-		int output =Integer.parseInt(str);
-		return (output-20000);
+		int output = Integer.parseInt(str);
+		return (output);
 	}
 
-
+	//Exits the Weightsim
 	public void ExitWeight() throws IOException {
 
 		out.println("Q crlf");
@@ -89,11 +93,12 @@ public class WeightFunction {
 		pingSocket.close();
 	}
 	
+	
 	public List<String> getItemsAsStrings() {
 		ArrayList<String> itemsAsStrings = new ArrayList<String>();
 		for(int i = 0; i<=storage.getItems().size(); i++) {
 			itemsAsStrings.add(storage.getItems().get(i).toString());
 		}
-		ret
+		return itemsAsStrings;
 	}
 }
