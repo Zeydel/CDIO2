@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
+import dal.NPitem;
 import dal.WeightSim;
 
 public class WeightFunction {
@@ -14,6 +15,7 @@ public class WeightFunction {
 	Socket pingSocket = null;
 	PrintWriter out = null;
 	BufferedReader in = null;
+	NPitem storage = new NPitem();
 
 	public WeightFunction() {
 		try {
@@ -28,11 +30,7 @@ public class WeightFunction {
 	public static void main(String[] args) {
 		WeightFunction test = new WeightFunction();
 		try {
-			test.WriteTextInDisplay("hejsa");
-			test.ReturnToWeightDisplay();
-			System.out.println(test.getWeight());
-			test.WeightTare();
-			System.out.println(test.getWeight());
+			System.out.println(test.EnterNumber("test"));
 		} catch (IOException e) {
 			System.out.println("failed");
 		}
@@ -69,70 +67,21 @@ public class WeightFunction {
 	public void WriteTextInDisplay(String text) throws IOException {
 		out.println("D ”" + text + "” crlf");
 
-
 	}
 
 
-	public void EnterNumber() throws IOException {
-		//	        	public static void main(String[] args) throws IOException{
-		//	           		
-		//	        		Socket pingSocket = null;
-		//	    	        PrintWriter out = null;
-		//	    	        BufferedReader in = null;
-
-		try {
-			pingSocket = new Socket("127.0.0.1", 8000);
-			System.out.println("Connected to weight simulator");
-			out = new PrintWriter(pingSocket.getOutputStream(), true);
-			in = new BufferedReader(new InputStreamReader(pingSocket.getInputStream()));
-		} catch(IOException e) {
-			return;		
-		}
-		out.println("RM20 8 ”INDTAST BATCHNUMBER” ”” ”&3” crlf");
-		System.out.println(in.readLine());
-		out.println("RM20 B crlf");
-		System.out.println(in.readLine());
-		out.close();
-		in.close();
-		pingSocket.close();
+	public int EnterNumber(String msg) throws IOException {
+		out.println("RM20 8 ”"+ msg +"” ”” crlf");
+		in.readLine();
+		String str = in.readLine().replaceAll("\\D+","");
+		int output =Integer.parseInt(str);
+		return (output-20000);
 	}
 
-	public void EnterID() throws IOException {
-		try {
-			pingSocket = new Socket("127.0.0.1", 8000);
-			System.out.println("Connected to weight simulator");
-			out = new PrintWriter(pingSocket.getOutputStream(), true);
-			in = new BufferedReader(new InputStreamReader(pingSocket.getInputStream()));
-		} catch(IOException e) {
-			return;	
-		}
-		out.println("RM20 8 ”INDTAST ID” ”” ”&3” crlf");
-		System.out.println(in.readLine());
-		out.println("RM20 B crlf");
-		System.out.println(in.readLine());
-		out.close();
-		in.close();
-		pingSocket.close();
-	}
 
 	public void ExitWeight() throws IOException {
 
-		//	        	public static void main(String[] args) throws IOException{
-		//       		
-		//	        		Socket pingSocket = null;
-		//	    	        PrintWriter out = null;
-		//	    	        BufferedReader in = null;
-
-		try {
-			pingSocket = new Socket("127.0.0.1", 8000);
-			System.out.println("Connected to weight simulator");
-			out = new PrintWriter(pingSocket.getOutputStream(), true);
-			in = new BufferedReader(new InputStreamReader(pingSocket.getInputStream()));
-		} catch(IOException e) {
-			return;		
-		}
 		out.println("Q crlf");
-		System.out.println(in.readLine());
 		out.close();
 		in.close();
 		pingSocket.close();
