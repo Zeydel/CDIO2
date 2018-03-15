@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import dal.NPitem;
@@ -65,13 +67,13 @@ public class WeightFunction {
 
         
 	public void WriteTextInDisplay(String text) throws IOException {
-		out.println("D î" + text + "î crlf");
+		out.println("D ‚Äù" + text + "‚Äù crlf");
 
 	}
 
 
 	public int EnterNumber(String msg) throws IOException {
-		out.println("RM20 8 î"+ msg +"î îî crlf");
+		out.println("RM20 8 ‚Äù"+ msg +"‚Äù ‚Äù‚Äù crlf");
 		in.readLine();
 		String str = in.readLine().replaceAll("\\D+","");
 		int output =Integer.parseInt(str);
@@ -83,7 +85,15 @@ public class WeightFunction {
 
 		out.println("Q crlf");
 		out.close();
-		in.close();
+		in.close();  
 		pingSocket.close();
+	}
+	
+	public List<String> getItemsAsStrings() {
+		ArrayList<String> itemsAsStrings = new ArrayList<String>();
+		for(int i = 0; i<=storage.getItems().size(); i++) {
+			itemsAsStrings.add(storage.getItems().get(i).toString());
+		}
+		ret
 	}
 }
