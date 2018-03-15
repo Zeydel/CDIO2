@@ -17,9 +17,9 @@ public class WeightFunction {
 	Socket pingSocket = null;
 	PrintWriter out = null;
 	BufferedReader in = null;
-	NPitem storage = new NPitem();
+	static NPitem storage = new NPitem();
 
-	public WeightFunction() {
+	public WeightFunction(NPitem storage) {
 		try {
 		this.pingSocket = new Socket("127.0.0.1", 8000);
 		this.out = new PrintWriter(pingSocket.getOutputStream(), true);
@@ -27,10 +27,12 @@ public class WeightFunction {
 		} catch(IOException e) {
 			System.out.println("fail");
 		}
+		
+		this.storage = storage;
 	}
 
 	public static void main(String[] args) {
-		WeightFunction test = new WeightFunction();
+		WeightFunction test = new WeightFunction(storage);
 		try {
 			System.out.println(test.EnterNumber("test"));
 		} catch (IOException e) {
@@ -72,6 +74,10 @@ public class WeightFunction {
 	public void WriteTextInDisplay(String text) throws IOException {
 		out.println("D ”" + text + "” crlf");
 
+	}
+	
+	public void writeALotOfText(String msg) throws IOException {
+		out.println("P111 ”" + msg + "” crlf	");
 	}
 
 	//Writes a message in the display and returns a user number input
