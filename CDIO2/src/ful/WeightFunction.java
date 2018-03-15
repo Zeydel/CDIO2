@@ -18,6 +18,7 @@ public class WeightFunction {
 	PrintWriter out = null;
 	BufferedReader in = null;
 	static NPitem storage = new NPitem();
+	
 
 	public WeightFunction(NPitem storage) {
 		try {
@@ -72,19 +73,22 @@ public class WeightFunction {
 	}
 
     //Writes a message in the display 
-	public void WriteTextInDisplay(String text) throws IOException {
+	public String WriteTextInDisplay(String text) throws IOException {
 		String param = text.split(" ")[0];
 		String output = ("D ”" + param + "” crlf");
 		out.println(output);
 		in.readLine();
+		return (output);
 	} 
 	
+	//Writes a message in the display of 30 caracters 
 	public void writeALotOfText(String msg) throws IOException {
 		
 		String param;
 		param = msg;
 		out.println("P111 ”" + msg + "” crlf");
 	}
+
 
 	//Writes a message in the display and returns a user number input
 	public int EnterNumber(String msg) throws IOException {
