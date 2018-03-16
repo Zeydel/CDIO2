@@ -11,7 +11,6 @@ import java.util.Scanner;
 import org.omg.DynamicAny.DynAnyFactoryPackage.InconsistentTypeCodeHelper;
 
 import dal.NPitem;
-import dal.WeightSim;
 import dto.ItemDTO;
 
 public class WeightFunction {
