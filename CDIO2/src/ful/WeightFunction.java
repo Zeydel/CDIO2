@@ -81,12 +81,17 @@ public class WeightFunction {
 		return (output);
 	} 
 	
+	
 	//Writes a message in the display of 30 caracters 
-	public void writeALotOfText(String msg) throws IOException {
+	public String writeALotOfText(String msg) throws IOException {
 		
 		String param;
 		param = msg;
-		out.println("P111 ”" + msg + "” crlf");
+//		out.println("P111 ”" + msg + "” crlf");
+		String output = ("P111 ”" + msg + "” crlf");
+		out.println(output);
+		in.readLine();
+		return (output);
 	}
 
 
