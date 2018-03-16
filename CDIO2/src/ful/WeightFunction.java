@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import org.omg.DynamicAny.DynAnyFactoryPackage.InconsistentTypeCodeHelper;
 
+import dal.IUserDAO.DALException;
 import dal.NPitem;
 import dto.ItemDTO;
 
@@ -133,9 +134,22 @@ public class WeightFunction {
 	public List<String> getItemsAsStrings() {
 		ArrayList<String> itemsAsStrings = new ArrayList<String>();
 		for(int i = 0; i<storage.getItems().size(); i++) {
-			itemsAsStrings.add(storage.getItems().get(i).toString());
+			itemsAsStrings.add(storage.getItems().get(i).toString() + "\n");
 		}
 		return itemsAsStrings;
+	}
+	
+	public ArrayList<ItemDTO> getBatchList() {
+		return storage.getItems();
+	}
+	
+	public void deleteBatchItem(int batchNr) {
+		try {
+			storage.deleteItem(batchNr);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void addItem(int batchNr, String Name, int weight, int user) {

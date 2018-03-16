@@ -30,14 +30,21 @@
 		<artifactId>UserDAODiscImplementation</artifactId>
 		<version>1.0</version>
 		<scope>system</scope>
-		<systemPath>${basedir}/UserDAODiscImplementation.jar</systemPath>
+		<systemPath>${basedir}/Dependencies/UserDAODiscImplementation.jar</systemPath>
 	</dependency>
   	<dependency>
   		<groupId>CDIO2</groupId>
   		<artifactId>mysql-connector-java.jar</artifactId>
   		<version>1.0</version>
   		<scope>system</scope>
-  		<systemPath>${basedir}/mysql-connector-java-5.1.45-bin.jar</systemPath>
+  		<systemPath>${basedir}/Dependencies/mysql-connector-java-5.1.45-bin.jar</systemPath>
+  	</dependency>
+  	<dependency>
+  		<groupId>CDIO2</groupId>
+  		<artifactId>weight</artifactId>
+  		<version>1.0</version>
+  		<scope>system</scope>
+  		<systemPath>${basedir}/Dependencies/weight.jar</systemPath>
   	</dependency>
   </dependencies>
 </project>

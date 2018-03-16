@@ -7,10 +7,13 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Random;
 
+import dal.IUserDAO.DALException;
 import dal.NPitem;
 import dal.NonPersistentStorage;
 import ful.UserFunction;
 import ful.WeightFunction;
+import dto.ItemDTO;
+
 
 
 public class LaborantTUI {
@@ -31,7 +34,7 @@ public class LaborantTUI {
 						"1. Foretag afvejning\n"+ 
 						"2. Vis afvejninger\n" + 
 						"3. Slet afvejning\n" +
-				"3. Afslut Program\n");
+				"4. Afslut Program\n");
 
 		System.out.println("Tryk venligst et tal mellem 1 og 3");
 		int choice = 0;
@@ -46,7 +49,8 @@ public class LaborantTUI {
 		case 2: showBatches();
 		break;
 		case 3: deleteBatch();
-		case 5: System.exit(0);
+		break;
+		case 4: System.exit(0);
 		break;
 		default:
 			System.out.println("FEJL: Tryk venligst et tal mellem 1 og 5");
@@ -113,11 +117,31 @@ public class LaborantTUI {
 	}
 
 	public void showBatches() {
+		//System.out.println(function.getItemsAsStrings());
+		for (ItemDTO item : function.getBatchList()) {
+			System.out.println(item);
+		}
+		
 
 	}
 
 	public void deleteBatch() {
-
+		System.out.println("Indtast batch nummer du ønsker at slette");
+		int deleteChoice = 0;
+		try {
+			deleteChoice = in.nextInt();
+		}catch (InputMismatchException e) {
+		}
+		for (ItemDTO item : function.getBatchList()) {
+			if (deleteChoice == item.getBatchNr()) {	
+				function.deleteBatchItem(item.getBatchNr());
+				System.out.println("Afvejning slettet");
+				break;
+			} else {
+				System.out.println("Nummer kunne ikke findes");
+				break;
+			} 
+		}
 	}
 
 }

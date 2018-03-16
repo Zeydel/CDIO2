@@ -12,6 +12,9 @@ public class NPitem {
 	ArrayList<ItemDTO> items = new ArrayList<ItemDTO>();
 	public NPitem() {
 				items.add(new ItemDTO(1234, "Salt", 4, 12));
+				items.add(new ItemDTO(2, "Avokado", 1, 12));
+				items.add(new ItemDTO(3, "M&M's", 6, 13));
+
 	}
 	
 	public ArrayList<ItemDTO> getItems(){
@@ -35,6 +38,7 @@ public class NPitem {
 		for (int i = 0; i<=items.size();i++) {
 			if (items.get(i).getBatchNr() == BatchNr) {
 				items.remove(i);
+				//System.out.println("batch removed");
 				return;
 			}
 		} 	throw new DALException("Item with id " + BatchNr + " not found.");
