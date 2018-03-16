@@ -20,18 +20,6 @@ public class LaborantTUI {
 	Scanner in = new Scanner(System.in);
 
 
-
-	public static void main(String []args) {
-		NPitem item = new NPitem();
-		WeightFunction wf = new WeightFunction(item);
-		NonPersistentStorage NPS = new NonPersistentStorage();
-		UserFunction tobias = new UserFunction(NPS);
-
-		LaborantTUI TUI = new LaborantTUI(wf, tobias);
-		TUI.createBatcht();
-
-	}
-
 	public LaborantTUI (WeightFunction function, UserFunction uFunction) {
 		this.function = function;
 		this.uFunction = uFunction;
@@ -75,11 +63,11 @@ public class LaborantTUI {
 				id = function.EnterNumber("No user with this ID, try again");	
 			}
 			String name = uFunction.findUser(id).getUserName();
-			
+
 			function.ReturnToWeightDisplay();
-			
+
 			function.writeALotOfText("Welcome " + name + ", press [-> to continue");
-			
+
 			int batchNr = function.EnterNumber("Enter BatchNr");
 			System.out.println(function.isValidBatchNumber(batchNr));
 			while(!function.isValidBatchNumber(batchNr)) {
@@ -87,37 +75,37 @@ public class LaborantTUI {
 			}
 			function.ReturnToWeightDisplay();
 			function.writeALotOfText("Fjern venligst alt fra vægten");
-			
+
 			function.WeightTare();
-			
+
 			function.ReturnToWeightDisplay();
-			
+
 			function.writeALotOfText("Placer tom beholder på vægt");
-			
+
 			int tareWeight = function.getWeight();
-			
+
 			function.WeightTare();
-			
-			
+
+
 			function.writeALotOfText("Placer indhold i beholder");
-			
+
 			int netto = function.getWeight();
-			
+
 			function.WeightTare();
-			
+
 			function.writeALotOfText("Fjern alt fra vægten");
-			
+
 			int brutto = function.getWeight();
-			
+
 			function.WeightTare();
-			
+
 			if(brutto - tareWeight == netto) {
 				String itemName = function.getStringFromDisplay("Hvad har du vejet?");
 				function.ReturnToWeightDisplay();
 				function.addItem(batchNr, itemName, netto, id);
-				
+
 			} else function.writeALotOfText("Fejl i bruttokontrol. Batch kasseret.");
-			
+
 		}catch(IOException e) {
 			System.out.println("lol rip");
 		}
