@@ -121,27 +121,18 @@ public class LaborantTUI {
 		for (ItemDTO item : function.getBatchList()) {
 			System.out.println(item);
 		}
-		
+
 
 	}
 
 	public void deleteBatch() {
-		System.out.println("Indtast batch nummer du ønsker at slette");
-		int deleteChoice = 0;
+		Scanner in = new Scanner(System.in);
+
 		try {
-			deleteChoice = in.nextInt();
-		}catch (InputMismatchException e) {
-		}
-		for (ItemDTO item : function.getBatchList()) {
-			if (deleteChoice == item.getBatchNr()) {	
-				function.deleteBatchItem(item.getBatchNr());
-				System.out.println("Afvejning slettet");
-				break;
-			} else {
-				System.out.println("Nummer kunne ikke findes");
-				break;
-			} 
+			function.deleteBatchItem(in.nextInt());
+			System.out.println("Batch Slettet");
+		} catch (InputMismatchException e) {
+			System.out.println("Skriv venligst et tal mellem 11 og 99. Afslutter til hovedmenu");
 		}
 	}
-
 }

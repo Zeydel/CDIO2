@@ -12,7 +12,8 @@ public class DBTester {
 		DBTester test = new DBTester();
 		test.run();
 	}
-
+	
+	//Kør TUI som administrator.
 	public void run() {
 		while(true) {
 			ui.showMenu();

@@ -14,6 +14,8 @@ public class LabTester {
 	WeightFunction WF = new WeightFunction(IS);
 	LaborantTUI TUI = new LaborantTUI(WF, UF);
 
+	//Kør TUI som laborant
+	//Åben vægtsimulator før du kører denne
 	public static void main(String[] args) {
 		LabTester LT = new LabTester();
 		LT.run();
