@@ -21,8 +21,8 @@ public class UserFunction {
 		this.storage = storage;
 	}
 
-	public void addUser(int userId, String userName, List<String> roles, String password, String cpr) throws DALException {
-		storage.createUser(new UserDTO(userId, userName, roles, password, cpr));
+	public void addUser(int userId, String userName, String ini, List<String> roles, String password, String cpr) throws DALException {
+		storage.createUser(new UserDTO(userId, userName, ini, roles, password, cpr));
 	}
 
 	public void editName(int userId, String newName) throws DALException {

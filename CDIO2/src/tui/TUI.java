@@ -97,9 +97,12 @@ public class TUI {
 		System.out.println("Skriv brugerens cpr");
 
 		String cpr = in.next();
+		
+		
+		//missing method for creating initials
 
 		try {
-			function.addUser(id, userName, roles, password, cpr);
+			function.addUser(id, userName, "INITIALS VARIABLE GOES HERE", roles, password, cpr);
 		} catch (DALException e) {
 			System.out.println("Brugeren kunne ikke tilf�jes. Afslutter til menu");
 		}
